@@ -32,7 +32,7 @@ export const personalInfo = {
     'I architect and build production-grade backend systems, robust REST APIs, real-time WebSocket applications, and containerized cloud deployments.',
   bio: `I am a backend-focused software developer and Computer Science & Engineering undergraduate at Daffodil International University (DIU), Dhaka, with a Diploma in Engineering from Magura Polytechnic Institute. My core focus lies in crafting scalable backend architectures with Django & Django REST Framework, building asynchronous task processing pipelines with Celery and Redis, and deploying multi-container services with Docker. 
 
-Passionate about problem-solving and algorithmic thinking, I have solved 600+ problems across Codeforces, LeetCode, AtCoder, VJudge, HackerRank, and Toph. I have achieved multiple podium and top-rank finishes in competitive programming contests, including 3rd Place at DCC Programming Fest 2021 and 6th Place at DIU Unlock the Algorithm. My journey began in 2020 on a smartphone, and since then I have developed full-scale production applications with payment integrations, WebSockets, and automated CI/CD pipelines.`,
+Passionate about problem-solving and algorithmic thinking, I have solved 600+ problems across Codeforces, LeetCode, AtCoder, VJudge, HackerRank, and Toph. I have achieved multiple podium and top-rank finishes in competitive programming contests, including 3rd Place at DCC Programming Fest 2021 and 6th Place at DIU Unlock the Algorithm. My journey began in 2018 when I discovered Programming in C/C++ and Python, and since then I have developed full-scale production applications with payment integrations, WebSockets, and automated CI/CD pipelines.`,
   email: 'rahman23105101275@diu.edu.bd',
   phone: '+8801790848236',
   location: 'Dhaka, Bangladesh',
@@ -401,23 +401,23 @@ export const experiences = [
     companyUrl: 'https://github.com/MNR-Tushar',
     duration: 'Aug 2017 – Jun 2021',
     description: [
-      'Graduated with a Diploma in Engineering, building a core technical foundation in computing basics, mathematics, and electronics.',
+      'Graduated with a Diploma in Engineering, building a core technical foundation in computing basics, CSE fundamentals, Programming Logic, System Design, Web Design and Web Basics.',
       'Transitioned technical curiosity into software development, initiating a dedicated self-taught coding journey.',
     ],
-    technologies: ['Engineering Fundamentals', 'Computing Basics', 'Electronics', 'Logic Design'],
+    technologies: ['Engineering Fundamentals', 'Computing Basics', 'Programming Logic', 'System Design', 'Web Design', 'Web Basics'],
   },
   {
     id: 7,
-    role: 'Self-Taught Developer — The Smartphone Journey',
+    role: 'Self-Taught Developer',
     company: 'Self-Driven Learning Journey',
     companyUrl: 'https://github.com/MNR-Tushar',
     duration: '2020 - 2021',
     description: [
-      'Began programming during the COVID-19 pandemic on an Android smartphone, learning Java fundamentals without a computer.',
-      'Acquired first laptop in December 2021 and immediately accelerated into Python, Django, database systems, and web architecture.',
+      'Began programming during the COVID-19 pandemic and learning Python, C++, Java, OOP, and web fundamentals.',
+      'Continued learning Python, Django, database systems, and web architecture.',
       'Demonstrated high self-discipline, resilience, and rapid capability to learn complex production stacks independently.',
     ],
-    technologies: ['Java', 'Python', 'Object-Oriented Programming', 'Web Basics'],
+    technologies: ['Python', 'C++', 'Java', 'OOP', 'Web Fundamentals', 'Django', 'Database Systems', 'Web Architecture'],
   },
 ]
 
