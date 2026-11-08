@@ -151,93 +151,100 @@ export default function About() {
 
         {/* Highlight Cards: Education, Problem Solving & Contest Achievements */}
         <div className="about-cards-grid">
-          {/* Education Card */}
+          {/* 1. Education Card */}
           <div className="about-card education-card">
             <div className="about-card-icon">
               <FaGraduationCap size={20} />
             </div>
             <div className="about-card-body">
-              <span className="card-tag">Education</span>
-              <h4 className="card-title">Academic Journey</h4>
-              
+              <div className="card-top-content">
+                <span className="card-tag">Education</span>
+                <h4 className="card-title">Academic Journey</h4>
+              </div>
+
               <div className="edu-compact-list">
+                {/* B.Sc. in CSE */}
                 <div className="edu-compact-item">
                   <div className="edu-compact-header">
                     <span className="edu-compact-degree">B.Sc. in CSE</span>
                     <span className="edu-compact-date">2023 – 2026</span>
                   </div>
                   <span className="edu-compact-inst">Daffodil International University (DIU), Savar</span>
+                  <div className="edu-course-chips">
+                    <span className="edu-chip">DSA</span>
+                    <span className="edu-chip">Algorithms</span>
+                    <span className="edu-chip">OOP</span>
+                    <span className="edu-chip">DBMS</span>
+                    <span className="edu-chip">Compilers</span>
+                    <span className="edu-chip">Networks</span>
+                    <span className="edu-chip">Systems Design &amp; Analysis</span>
+                    <span className="edu-chip">Software Engineering</span>
+                  </div>
                 </div>
 
-                <div className="edu-course-chips">
-                <span className="edu-chip">DSA</span>
-                <span className="edu-chip">Algorithms</span>
-                <span className="edu-chip">OOP</span>
-                <span className="edu-chip">DBMS</span>
-                <span className="edu-chip">Compilers</span>
-                <span className="edu-chip">Networks</span>
-                <span className="edu-chip">Systems Design & Analysis</span>
-                <span className="edu-chip">Software Engineering</span>
-              </div>
-
+                {/* Diploma in Engineering */}
                 <div className="edu-compact-item">
                   <div className="edu-compact-header">
                     <span className="edu-compact-degree">Diploma in Engineering</span>
                     <span className="edu-compact-date">2017 – 2021</span>
                   </div>
                   <span className="edu-compact-inst">Magura Polytechnic Institute, Magura</span>
+                  <div className="edu-course-chips">
+                    <span className="edu-chip">Programming Languages</span>
+                    <span className="edu-chip">DSA</span>
+                    <span className="edu-chip">DBMS</span>
+                    <span className="edu-chip">OOP</span>
+                    <span className="edu-chip">Networks</span>
+                    <span className="edu-chip">Systems</span>
+                    <span className="edu-chip">CS Fundamentals</span>
+                  </div>
                 </div>
-              </div>
-
-              <div className="edu-course-chips">
-                <span className="edu-chip">Programming Languages</span>
-                <span className="edu-chip">DSA</span>
-                <span className="edu-chip">DBMS</span>
-                <span className="edu-chip">OOP</span>
-                <span className="edu-chip">Networks</span>
-                <span className="edu-chip">Systems</span>
-                <span className="edu-chip">CS Fundamentals</span>
-                
               </div>
             </div>
           </div>
 
-          {/* Problem Solving / CP Card */}
+          {/* 2. Problem Solving / CP Card */}
           <div className="about-card cp-card">
             <div className="about-card-icon cp-icon">
               <FaCode size={20} />
             </div>
             <div className="about-card-body">
-              <span className="card-tag">Problem Solving</span>
-              <h4 className="card-title">{problemSolving.totalSolved} Problems Solved</h4>
-              <p className="card-subtitle-compact">Active on global algorithmic judges</p>
-              
-              <div className="cp-platforms-compact">
-                {problemSolving.platforms.map(p => (
-                  <span key={p.name} className="cp-platform-pill" title={p.name}>
-                    <p.icon size={11} style={{ color: p.color }} />
-                    <span>{p.name}</span>
-                  </span>
-                ))}
+              <div className="card-top-content">
+                <span className="card-tag">Problem Solving</span>
+                <h4 className="card-title">600+ Problems Solved</h4>
+                <p className="card-subtitle-compact">Active on global algorithmic judges</p>
               </div>
 
-              <div className="cp-topics-compact">
-                {problemSolving.topics.slice(0, 6).map(t => (
-                  <span key={t} className="cp-topic-tag">{t}</span>
-                ))}
+              <div className="cp-card-middle">
+                <div className="cp-platforms-compact">
+                  {problemSolving.platforms.map((p) => (
+                    <span key={p.name} className="cp-platform-pill" title={p.name}>
+                      <p.icon size={12} style={{ color: p.color }} />
+                      <span>{p.name}</span>
+                    </span>
+                  ))}
+                </div>
+
+                <div className="cp-topics-compact">
+                  {problemSolving.topics.map((t) => (
+                    <span key={t} className="cp-topic-tag">{t}</span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Contest Achievements Card */}
+          {/* 3. Contest Achievements Card */}
           <div className="about-card achievements-card">
             <div className="about-card-icon trophy-icon">
               <FaTrophy size={18} />
             </div>
             <div className="about-card-body">
-              <span className="card-tag gold">Contest Achievements</span>
-              <h4 className="card-title">Podium &amp; Contest Finishes</h4>
-              <p className="card-subtitle-compact">Verified performances in CP competitions</p>
+              <div className="card-top-content">
+                <span className="card-tag gold">Contest Achievements</span>
+                <h4 className="card-title">Podium &amp; Contest Finishes</h4>
+                <p className="card-subtitle-compact">Verified performances in CP competitions</p>
+              </div>
 
               <div className="achievements-compact-list">
                 {achievements.map((item, idx) => (
