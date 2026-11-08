@@ -54,13 +54,12 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {new Date().getFullYear()} Md Naimur Rahman. Made with{' '}
-            <FiHeart className="heart-icon" size={14} /> and React.
+            © {new Date().getFullYear()} Md Naimur Rahman.
           </p>
 
-          <button className="scroll-top" onClick={scrollToTop} aria-label="Scroll to top">
+          {/* <button className="scroll-top" onClick={scrollToTop} aria-label="Scroll to top">
             <FiArrowUp size={18} />
-          </button>
+          </button> */}
         </div>
       </div>
     </footer>

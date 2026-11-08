@@ -164,10 +164,21 @@ export default function About() {
                 <div className="edu-compact-item">
                   <div className="edu-compact-header">
                     <span className="edu-compact-degree">B.Sc. in CSE</span>
-                    <span className="edu-compact-date">2023 – Present</span>
+                    <span className="edu-compact-date">2023 – 2026</span>
                   </div>
                   <span className="edu-compact-inst">Daffodil International University (DIU), Savar</span>
                 </div>
+
+                <div className="edu-course-chips">
+                <span className="edu-chip">DSA</span>
+                <span className="edu-chip">Algorithms</span>
+                <span className="edu-chip">OOP</span>
+                <span className="edu-chip">DBMS</span>
+                <span className="edu-chip">Compilers</span>
+                <span className="edu-chip">Networks</span>
+                <span className="edu-chip">Systems Design & Analysis</span>
+                <span className="edu-chip">Software Engineering</span>
+              </div>
 
                 <div className="edu-compact-item">
                   <div className="edu-compact-header">
@@ -179,11 +190,14 @@ export default function About() {
               </div>
 
               <div className="edu-course-chips">
+                <span className="edu-chip">Programming Languages</span>
                 <span className="edu-chip">DSA</span>
                 <span className="edu-chip">DBMS</span>
-                <span className="edu-chip">Compilers</span>
+                <span className="edu-chip">OOP</span>
                 <span className="edu-chip">Networks</span>
                 <span className="edu-chip">Systems</span>
+                <span className="edu-chip">CS Fundamentals</span>
+                
               </div>
             </div>
           </div>

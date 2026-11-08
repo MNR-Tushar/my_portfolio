@@ -392,7 +392,7 @@ export const experiences = [
       'Pursuing B.Sc. in CSE with focused specialization in Backend Systems, Relational Database Modeling, and Distributed Architectures.',
       'Core Coursework: Data Structures & Algorithms, DBMS, Compiler Design, Software Engineering, Computer Networks.',
     ],
-    technologies: ['CS Fundamentals', 'Software Engineering', 'Relational Databases', 'System Architecture'],
+    technologies: ['Algorithms', 'Data Structures', 'OOP', 'DBMS', 'Systems Design & Analysis','Compilers', 'Networks', 'Software Engineering'],
   },
   {
     id: 6,
