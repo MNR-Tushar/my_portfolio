@@ -20,13 +20,16 @@ export default function Experience() {
         </div>
 
         <div ref={ref} className="timeline">
+          {/* Animated timeline line */}
+          <div className={`timeline-line-animated ${isVisible ? 'grow' : ''}`} />
+
           {experiences.map((exp, index) => (
             <div
               key={exp.id}
               className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'} fade-in ${isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: isVisible ? `${index * 140}ms` : '0ms' }}
+              style={{ transitionDelay: isVisible ? `${index * 200}ms` : '0ms' }}
             >
-              <div className="timeline-dot">
+              <div className={`timeline-dot ${isVisible ? 'dot-pop' : ''}`} style={{ animationDelay: `${index * 200 + 300}ms` }}>
                 <FiBriefcase size={14} />
               </div>
 

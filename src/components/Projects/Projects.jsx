@@ -1,15 +1,57 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { projects } from '../../data/portfolioData'
-import { useScrollAnimation, useStaggerAnimation } from '../../hooks/useScrollAnimation'
-import { FiGithub, FiExternalLink, FiTerminal, FiLayers } from 'react-icons/fi'
+import { useStaggerAnimation } from '../../hooks/useScrollAnimation'
+import { FiArrowRight, FiArrowUpRight, FiExternalLink, FiGithub } from 'react-icons/fi'
+import ProjectMockup from './ProjectMockup'
 import './Projects.css'
 
 const filterCategories = [
-  { label: 'All Projects', value: 'all' },
-  { label: 'Backend & APIs', value: 'backend' },
+  { label: 'All', value: 'all' },
+  { label: 'Backend', value: 'backend' },
   { label: 'Full Stack', value: 'fullstack' },
   { label: 'Frontend', value: 'frontend' },
 ]
+
+function TiltCard({ children, className, style }) {
+  const cardRef = useRef(null)
+  const [glowPos, setGlowPos] = useState({ x: 50, y: 50 })
+
+  const handleMouseMove = useCallback((e) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width) * 100
+    const y = ((e.clientY - rect.top) / rect.height) * 100
+    const rotateX = ((y - 50) / 50) * -4
+    const rotateY = ((x - 50) / 50) * 4
+
+    cardRef.current.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`
+    setGlowPos({ x, y })
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    if (!cardRef.current) return
+    cardRef.current.style.transform = ''
+    setGlowPos({ x: 50, y: 50 })
+  }, [])
+
+  return (
+    <div
+      ref={cardRef}
+      className={className}
+      style={style}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div
+        className="card-glow-effect"
+        style={{
+          background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(99, 102, 241, 0.12) 0%, transparent 60%)`,
+        }}
+      />
+      {children}
+    </div>
+  )
+}
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('all')
@@ -23,16 +65,16 @@ export default function Projects() {
     <section id="projects" className="section projects">
       <div className="container">
         <div className="section-header">
-          <span className="section-subtitle">// Engineering Portfolio</span>
+          <span className="section-subtitle">// Featured Works</span>
           <h2 className="section-title">
-            Featured <span className="gradient-text">Projects</span>
+            Crafted <span className="gradient-text">Projects</span>
           </h2>
           <p className="section-description">
-            Production-grade backends, real-time WebSocket systems, compiler tools, and microservices
+            Production-grade backends, real-time WebSocket systems, compiler tools, and web platforms
           </p>
         </div>
 
-        {/* Filter Buttons */}
+        {/* Filter Tabs */}
         <div className="project-filters">
           {filterCategories.map(filter => {
             const count = filter.value === 'all'
@@ -44,6 +86,7 @@ export default function Projects() {
                 key={filter.value}
                 className={`filter-btn ${activeFilter === filter.value ? 'active' : ''}`}
                 onClick={() => setActiveFilter(filter.value)}
+                type="button"
               >
                 {filter.label} <span className="filter-count">({count})</span>
               </button>
@@ -51,88 +94,105 @@ export default function Projects() {
           })}
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid with 3D Tilt Cards */}
         <div ref={ref} className="projects-grid">
-          {filtered.map((project, index) => (
-            <div
-              key={project.id}
-              className={`project-card fade-in ${isVisible ? 'visible' : ''}`}
-              style={getDelay(index)}
-            >
-              {/* Custom Technical Banner */}
-              <div
-                className="project-banner"
-                style={{ background: project.gradient || 'var(--bg-secondary)' }}
+          {filtered.map((project, index) => {
+            const hasLiveDemo = Boolean(project.liveUrl && project.liveUrl !== '#')
+            const previewUrl = hasLiveDemo ? project.liveUrl : project.githubUrl
+
+            return (
+              <TiltCard
+                key={project.id}
+                className={`custom-project-card fade-in ${isVisible ? 'visible' : ''}`}
+                style={getDelay(index)}
               >
-                <div className="banner-top">
-                  <div className="code-dots">
-                    <span className="dot red" />
-                    <span className="dot yellow" />
-                    <span className="dot green" />
-                  </div>
-                  <span className="project-badge-pill">{project.badge}</span>
-                </div>
+                {/* Top Visual Preview Container */}
+                <a
+                  href={previewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-mockup-wrapper"
+                  title={hasLiveDemo ? `Open ${project.title} Live Demo` : `View ${project.title} on GitHub`}
+                >
+                  <ProjectMockup project={project} />
 
-                <div className="banner-content">
-                  <div className="banner-endpoint">
-                    <FiTerminal className="terminal-icon" />
-                    <span className="endpoint-text">{project.endpoint}</span>
-                  </div>
-                  <div className="banner-status">
-                    <span className="status-indicator" />
-                    <span className="status-label">{project.statusText}</span>
-                  </div>
-                </div>
-
-                {project.featured && (
-                  <span className="featured-badge">Featured</span>
-                )}
-              </div>
-
-              {/* Project Body */}
-              <div className="project-info">
-                <div className="project-header-meta">
-                  <h3 className="project-title">{project.title}</h3>
-                  {project.tagline && (
-                    <span className="project-tagline">{project.tagline}</span>
-                  )}
-                </div>
-
-                <p className="project-description">{project.description}</p>
-
-                <div className="project-tags">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="project-tag">{tag}</span>
-                  ))}
-                </div>
-
-                {/* Bottom Action Footer */}
-                <div className="project-footer">
-                  <a
-                    href={project.githubUrl}
-                    className="project-action-btn primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  {/* Top Right Subtle Circle Button */}
+                  <div
+                    className={`preview-circle-indicator ${hasLiveDemo ? 'has-live' : ''}`}
+                    title={hasLiveDemo ? 'Live Demo' : 'GitHub Repository'}
                   >
-                    <FiGithub size={16} />
-                    <span>View Repository</span>
-                  </a>
+                    {hasLiveDemo ? <FiExternalLink size={14} /> : <FiArrowUpRight size={14} />}
+                  </div>
+                </a>
 
-                  {project.liveUrl && project.liveUrl !== '#' && (
+                {/* Card Content Area */}
+                <div className="card-inner-content">
+                  {/* Row of Pill Badges */}
+                  <div className="card-pills-row">
+                    {project.pills.map((pill) => (
+                      <span key={pill} className="pill-badge">
+                        {pill}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="custom-card-title">
                     <a
-                      href={project.liveUrl}
-                      className="project-action-btn secondary"
+                      href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="card-title-link"
+                      title={`View ${project.title} on GitHub`}
                     >
-                      <FiExternalLink size={16} />
-                      <span>Live Demo</span>
+                      {project.title}
                     </a>
-                  )}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="custom-card-desc">{project.description}</p>
+
+                  {/* Bottom Action Row */}
+                  <div className="card-bottom-row">
+                    {/* Left: View Project -> GitHub Repository */}
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="view-project-link"
+                      title={`View ${project.title} source code on GitHub`}
+                    >
+                      <FiGithub size={15} className="action-github-icon" />
+                      <span>View Project</span>
+                      <span className="arrow-sym">→</span>
+                    </a>
+
+                    {/* Right: Live Demo */}
+                    {hasLiveDemo ? (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="circle-arrow-btn has-live"
+                        title={`Open ${project.title} Live Demo`}
+                        aria-label={`Open ${project.title} Live Demo`}
+                      >
+                        <FiExternalLink size={15} />
+                      </a>
+                    ) : (
+                      <span
+                        className="circle-arrow-btn is-disabled"
+                        title="Backend API (Live Demo Not Deployed)"
+                        aria-label="Live Demo not deployed"
+                      >
+                        <FiArrowRight size={15} />
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </TiltCard>
+            )
+          })}
         </div>
       </div>
     </section>

@@ -1,0 +1,776 @@
+/* Real Image Preview (when project.image is provided) */
+.project-image-wrapper {
+  height: 220px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #090a12;
+}
+
+.project-real-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-project-card:hover .project-real-image,
+.card-mockup-wrapper:hover .project-real-image {
+  transform: scale(1.06);
+}
+
+.project-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(10, 10, 15, 0.5) 100%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.custom-project-card:hover .project-image-overlay {
+  opacity: 0.3;
+}
+
+[data-theme="light"] .project-image-wrapper {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .project-image-overlay {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.mockup-preview {
+  height: 220px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  font-family: var(--font-main);
+  background: #090a12;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====================================================
+   1. BLUE FEATURED THEME (e.g. PyPI / Docs Header style)
+   ==================================================== */
+.mockup-preview.blue-featured {
+  background: #0284c7;
+  color: #fff;
+}
+
+.mockup-header-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px 6px;
+  font-size: 0.68rem;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.search-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.68rem;
+  color: #e0f2fe;
+}
+
+.header-links {
+  display: flex;
+  gap: 10px;
+  opacity: 0.85;
+}
+
+.mockup-hero-blue {
+  padding: 8px 16px 10px;
+  flex: 1;
+}
+
+.featured-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #fef08a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.star-gold {
+  color: #facc15;
+}
+
+.hero-pkg-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.hero-pkg-desc {
+  font-size: 0.72rem;
+  opacity: 0.9;
+  line-height: 1.35;
+  margin: 3px 0 6px;
+  max-width: 90%;
+}
+
+.pip-box {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  color: #bae6fd;
+}
+
+.mockup-sub-white {
+  background: #ffffff;
+  color: #1e293b;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mockup-sub-tabs {
+  display: flex;
+  gap: 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
+}
+
+.mockup-sub-tabs .active-tab {
+  color: #0284c7;
+  border-bottom: 2px solid #0284c7;
+  margin-bottom: -5px;
+  padding-bottom: 3px;
+}
+
+.mockup-badge-cloud {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.mini-badge {
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.mini-badge.green { background: #dcfce7; color: #15803d; }
+.mini-badge.purple { background: #ede9fe; color: #6d28d9; }
+.mini-badge.blue { background: #dbeafe; color: #1d4ed8; }
+.mini-badge.red { background: #fee2e2; color: #b91c1c; }
+.mini-badge.teal { background: #ccfbf1; color: #0f766e; }
+
+/* ====================================================
+   2. DARK CODE THEME (Split Layout like Card 2)
+   ==================================================== */
+.mockup-preview.dark-code {
+  background: #090c15;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-split-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.code-split-tag {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  color: #a78bfa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.code-split-title {
+  font-size: 0.95rem;
+  font-weight: 750;
+  line-height: 1.25;
+  color: #f1f5f9;
+}
+
+.code-split-desc {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  line-height: 1.35;
+}
+
+.code-split-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.btn-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.btn-mini.primary { background: #6366f1; color: #fff; }
+.btn-mini.outline { background: rgba(255, 255, 255, 0.06); color: #cbd5e1; border: 1px solid rgba(255, 255, 255, 0.12); }
+.btn-mini.purple { background: #8b5cf6; color: #fff; }
+
+.mini-editor-box {
+  background: #030712;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: var(--font-code);
+  font-size: 0.62rem;
+  line-height: 1.45;
+  color: #93c5fd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.mini-editor-dots {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.mini-editor-dots .d { width: 6px; height: 6px; border-radius: 50%; }
+.mini-editor-dots .d.red { background: #ef4444; }
+.mini-editor-dots .d.yellow { background: #f59e0b; }
+.mini-editor-dots .d.green { background: #10b981; }
+
+/* ====================================================
+   3. PURPLE ANALYZER THEME (like Card 3)
+   ==================================================== */
+.mockup-preview.purple-analyzer {
+  background: #0d0c18;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 14px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.analyzer-tag {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  color: #c084fc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.analyzer-title {
+  font-size: 0.95rem;
+  font-weight: 750;
+  line-height: 1.25;
+  color: #f1f5f9;
+  margin: 2px 0 4px;
+}
+
+.highlight-purple {
+  color: #c084fc;
+}
+
+.analyzer-desc {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.analyzer-input-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 6px 3px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 6px;
+  font-family: var(--font-code);
+  font-size: 0.68rem;
+  color: #e2e8f0;
+}
+
+.analyzer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.grade-badge {
+  padding: 3px 8px;
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid #a855f7;
+  color: #e9d5ff;
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.matrix-visual {
+  background: #05050b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: var(--font-code);
+  font-size: 0.62rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.matrix-row {
+  display: flex;
+  justify-content: space-between;
+  color: #94a3b8;
+}
+
+.matrix-row .val { color: #38bdf8; font-weight: 600; }
+.matrix-row .val.valid { color: #34d399; }
+.matrix-row .val.none { color: #a78bfa; }
+
+/* ====================================================
+   4. NAVY PORTAL THEME (CR Reviews)
+   ==================================================== */
+.mockup-preview.navy-portal {
+  background: #091322;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.portal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: #94a3b8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+}
+
+.portal-status {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.portal-title {
+  font-size: 1rem;
+  font-weight: 750;
+  color: #f1f5f9;
+  margin-bottom: 6px;
+}
+
+.portal-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  font-size: 0.68rem;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+
+.portal-card-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  border-radius: 6px;
+}
+
+.cr-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cr-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #0284c7;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.cr-name {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.cr-meta {
+  font-size: 0.62rem;
+  color: #94a3b8;
+}
+
+.cr-rating {
+  text-align: right;
+}
+
+.cr-rating .stars {
+  color: #facc15;
+  font-size: 0.72rem;
+  display: block;
+}
+
+.cr-rating .score {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+/* ====================================================
+   5. DARK EDITORIAL THEME (LearnLog)
+   ==================================================== */
+.mockup-preview.dark-editorial {
+  background: #0c0d13;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editorial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: #a1a1aa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+}
+
+.editorial-article-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.article-category {
+  font-family: var(--font-code);
+  font-size: 0.62rem;
+  color: #818cf8;
+  text-transform: uppercase;
+}
+
+.article-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f4f4f6;
+  line-height: 1.3;
+}
+
+.article-excerpt {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  line-height: 1.35;
+}
+
+.article-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.65rem;
+  color: #71717a;
+  margin-top: 4px;
+}
+
+.comment-pill {
+  margin-left: auto;
+  color: #a1a1aa;
+}
+
+/* ====================================================
+   6. CYAN MINIMAL THEME (Personal Dashboard)
+   ==================================================== */
+.mockup-preview.cyan-minimal {
+  background: #081116;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dashboard-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-time {
+  color: #2dd4bf;
+  font-weight: 700;
+}
+
+.dashboard-weather {
+  color: #cbd5e1;
+}
+
+.dashboard-widgets {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 10px;
+}
+
+.widget-todo,
+.widget-notes {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.65rem;
+  color: #94a3b8;
+}
+
+.widget-header {
+  font-weight: 700;
+  color: #f1f5f9;
+  font-size: 0.7rem;
+  margin-bottom: 6px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.todo-item.checked {
+  color: #2dd4bf;
+}
+
+.checkbox-empty {
+  width: 9px;
+  height: 9px;
+  border: 1px solid #64748b;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ====================================================
+   LIGHT THEME — ALL MOCKUP PREVIEWS
+   ==================================================== */
+
+/* 1. Blue Featured — top area stays blue, sub-white stays white */
+[data-theme="light"] .mockup-preview.blue-featured {
+  background: #2563eb;
+}
+[data-theme="light"] .mockup-sub-white {
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+[data-theme="light"] .mockup-sub-tabs {
+  color: #475569;
+  border-bottom-color: #e2e8f0;
+}
+[data-theme="light"] .mockup-sub-tabs .active-tab {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+/* 2. Dark Code → Light Code */
+[data-theme="light"] .mockup-preview.dark-code {
+  background: #f1f5f9;
+  border-bottom-color: #e2e8f0;
+}
+[data-theme="light"] .code-split-tag {
+  color: #7c3aed;
+}
+[data-theme="light"] .code-split-title {
+  color: #1e293b;
+}
+[data-theme="light"] .code-split-desc {
+  color: #475569;
+}
+[data-theme="light"] .btn-mini.primary {
+  background: #4f46e5;
+}
+[data-theme="light"] .btn-mini.outline {
+  background: rgba(0, 0, 0, 0.04);
+  color: #334155;
+  border-color: #cbd5e1;
+}
+[data-theme="light"] .mini-editor-box {
+  background: #1e293b;
+  border-color: #334155;
+  color: #93c5fd;
+}
+
+/* 3. Purple Analyzer → Light Analyzer */
+[data-theme="light"] .mockup-preview.purple-analyzer {
+  background: #f5f3ff;
+  border-bottom-color: #e2e8f0;
+}
+[data-theme="light"] .analyzer-tag {
+  color: #7c3aed;
+}
+[data-theme="light"] .analyzer-title {
+  color: #1e293b;
+}
+[data-theme="light"] .highlight-purple {
+  color: #7c3aed;
+}
+[data-theme="light"] .analyzer-desc {
+  color: #475569;
+}
+[data-theme="light"] .analyzer-input-box {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(124, 58, 237, 0.3);
+  color: #334155;
+}
+[data-theme="light"] .grade-badge {
+  background: rgba(124, 58, 237, 0.12);
+  border-color: #7c3aed;
+  color: #5b21b6;
+}
+[data-theme="light"] .matrix-visual {
+  background: #ede9fe;
+  border-color: #ddd6fe;
+}
+[data-theme="light"] .matrix-row {
+  color: #475569;
+}
+[data-theme="light"] .matrix-row .val { color: #2563eb; }
+[data-theme="light"] .matrix-row .val.valid { color: #059669; }
+[data-theme="light"] .matrix-row .val.none { color: #7c3aed; }
+
+/* 4. Navy Portal → Light Portal */
+[data-theme="light"] .mockup-preview.navy-portal {
+  background: #eff6ff;
+}
+[data-theme="light"] .portal-header {
+  color: #475569;
+  border-bottom-color: #e2e8f0;
+}
+[data-theme="light"] .portal-status {
+  color: #2563eb;
+}
+[data-theme="light"] .portal-title {
+  color: #1e293b;
+}
+[data-theme="light"] .portal-search-bar {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: #cbd5e1;
+  color: #475569;
+}
+[data-theme="light"] .portal-card-preview {
+  background: rgba(37, 99, 235, 0.06);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+[data-theme="light"] .cr-avatar {
+  background: #3b82f6;
+}
+[data-theme="light"] .cr-name {
+  color: #1e293b;
+}
+[data-theme="light"] .cr-meta {
+  color: #64748b;
+}
+[data-theme="light"] .cr-rating .score {
+  color: #2563eb;
+}
+
+/* 5. Dark Editorial → Light Editorial */
+[data-theme="light"] .mockup-preview.dark-editorial {
+  background: #fafafa;
+}
+[data-theme="light"] .editorial-header {
+  color: #64748b;
+  border-bottom-color: #e2e8f0;
+}
+[data-theme="light"] .editorial-article-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .article-category {
+  color: #4f46e5;
+}
+[data-theme="light"] .article-title {
+  color: #1e293b;
+}
+[data-theme="light"] .article-excerpt {
+  color: #475569;
+}
+[data-theme="light"] .article-footer {
+  color: #94a3b8;
+}
+[data-theme="light"] .comment-pill {
+  color: #64748b;
+}
+
+/* 6. Cyan Minimal → Light Dashboard */
+[data-theme="light"] .mockup-preview.cyan-minimal {
+  background: #f0fdfa;
+}
+[data-theme="light"] .dashboard-topbar {
+  border-bottom-color: #e2e8f0;
+}
+[data-theme="light"] .dashboard-time {
+  color: #0d9488;
+}
+[data-theme="light"] .dashboard-weather {
+  color: #334155;
+}
+[data-theme="light"] .widget-todo,
+[data-theme="light"] .widget-notes {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+[data-theme="light"] .widget-header {
+  color: #1e293b;
+}
+[data-theme="light"] .todo-item.checked {
+  color: #0d9488;
+}
+[data-theme="light"] .checkbox-empty {
+  border-color: #94a3b8;
+}

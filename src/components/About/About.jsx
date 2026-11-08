@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
-import { personalInfo, stats, education, problemSolving } from '../../data/portfolioData'
+import { personalInfo, stats, education, problemSolving, achievements } from '../../data/portfolioData'
 import { useScrollAnimation } from '../../hooks/useScrollAnimation'
-import { FaGraduationCap, FaCode, FaCheckCircle, FaLaptopCode } from 'react-icons/fa'
+import { FaGraduationCap, FaCode, FaCheckCircle, FaLaptopCode, FaTrophy } from 'react-icons/fa'
 import { FiArrowRight } from 'react-icons/fi'
 import './About.css'
 
@@ -47,9 +47,25 @@ function AnimatedCounter({ target, suffix = '' }) {
   return <span ref={ref}>{count}{suffix}</span>
 }
 
+const dynamicBadges = [
+  { number: '600+', line1: 'DSA Problems', line2: 'Solved' },
+  { number: '7+', line1: 'Core Projects', line2: 'Built' },
+  { number: '27+', line1: 'GitHub', line2: 'Repositories' },
+  { number: '100%', line1: 'Backend', line2: 'Focused' },
+]
+
 export default function About() {
   const [ref, isVisible] = useScrollAnimation()
   const [imgError, setImgError] = useState(false)
+  const [badgeIndex, setBadgeIndex] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBadgeIndex(prev => (prev + 1) % dynamicBadges.length)
+    }, 2000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <section id="about" className="section about">
@@ -67,23 +83,31 @@ export default function About() {
         <div ref={ref} className={`about-content fade-in ${isVisible ? 'visible' : ''}`}>
           <div className="about-image-wrapper">
             <div className="about-image-container">
-              {!imgError ? (
-                <img
-                  src={personalInfo.avatarUrl}
-                  alt={personalInfo.name}
-                  className="about-image"
-                  onError={() => setImgError(true)}
-                />
-              ) : (
-                <div className="about-image-fallback">
-                  <span className="fallback-text">&lt;MNR/&gt;</span>
-                </div>
-              )}
-              <div className="about-image-border" />
+              <div className="about-image-inner">
+                {!imgError ? (
+                  <img
+                    src={personalInfo.avatarUrl}
+                    alt={personalInfo.name}
+                    className="about-image"
+                    onError={() => setImgError(true)}
+                  />
+                ) : (
+                  <div className="about-image-fallback">
+                    <span className="fallback-text">&lt;MNR/&gt;</span>
+                  </div>
+                )}
+                <div className="about-image-border" />
+              </div>
             </div>
             <div className="about-experience-badge">
-              <span className="experience-number">600+</span>
-              <span className="experience-text">DSA Problems<br />Solved</span>
+              <div key={badgeIndex} className="badge-content-animated">
+                <span className="experience-number">{dynamicBadges[badgeIndex].number}</span>
+                <span className="experience-text">
+                  {dynamicBadges[badgeIndex].line1}
+                  <br />
+                  {dynamicBadges[badgeIndex].line2}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -125,50 +149,93 @@ export default function About() {
           </div>
         </div>
 
-        {/* Highlight Cards: Education & Problem Solving */}
+        {/* Highlight Cards: Education, Problem Solving & Contest Achievements */}
         <div className="about-cards-grid">
           {/* Education Card */}
-          <div className="about-card">
+          <div className="about-card education-card">
             <div className="about-card-icon">
-              <FaGraduationCap size={24} />
+              <FaGraduationCap size={20} />
             </div>
             <div className="about-card-body">
               <span className="card-tag">Education</span>
-              <h4 className="card-title">{education.degree}</h4>
-              <p className="card-subtitle">{education.institution}</p>
-              <ul className="card-points">
-                {education.highlights.map((h, i) => (
-                  <li key={i}>
-                    <FaCheckCircle className="check-icon" />
-                    <span>{h}</span>
-                  </li>
-                ))}
-              </ul>
+              <h4 className="card-title">Academic Journey</h4>
+              
+              <div className="edu-compact-list">
+                <div className="edu-compact-item">
+                  <div className="edu-compact-header">
+                    <span className="edu-compact-degree">B.Sc. in CSE</span>
+                    <span className="edu-compact-date">2023 – Present</span>
+                  </div>
+                  <span className="edu-compact-inst">Daffodil International University (DIU), Savar</span>
+                </div>
+
+                <div className="edu-compact-item">
+                  <div className="edu-compact-header">
+                    <span className="edu-compact-degree">Diploma in Engineering</span>
+                    <span className="edu-compact-date">2017 – 2021</span>
+                  </div>
+                  <span className="edu-compact-inst">Magura Polytechnic Institute, Magura</span>
+                </div>
+              </div>
+
+              <div className="edu-course-chips">
+                <span className="edu-chip">DSA</span>
+                <span className="edu-chip">DBMS</span>
+                <span className="edu-chip">Compilers</span>
+                <span className="edu-chip">Networks</span>
+                <span className="edu-chip">Systems</span>
+              </div>
             </div>
           </div>
 
           {/* Problem Solving / CP Card */}
-          <div className="about-card">
+          <div className="about-card cp-card">
             <div className="about-card-icon cp-icon">
-              <FaCode size={24} />
+              <FaCode size={20} />
             </div>
             <div className="about-card-body">
-              <span className="card-tag">Algorithmic Problem Solving</span>
+              <span className="card-tag">Problem Solving</span>
               <h4 className="card-title">{problemSolving.totalSolved} Problems Solved</h4>
-              <p className="card-subtitle">Active on leading competitive programming judges</p>
+              <p className="card-subtitle-compact">Active on global algorithmic judges</p>
               
-              <div className="cp-platforms">
+              <div className="cp-platforms-compact">
                 {problemSolving.platforms.map(p => (
-                  <span key={p.name} className="cp-platform-pill">
-                    <p.icon size={13} style={{ color: p.color }} />
-                    {p.name}
+                  <span key={p.name} className="cp-platform-pill" title={p.name}>
+                    <p.icon size={11} style={{ color: p.color }} />
+                    <span>{p.name}</span>
                   </span>
                 ))}
               </div>
 
-              <div className="cp-topics">
-                {problemSolving.topics.map(t => (
+              <div className="cp-topics-compact">
+                {problemSolving.topics.slice(0, 6).map(t => (
                   <span key={t} className="cp-topic-tag">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Contest Achievements Card */}
+          <div className="about-card achievements-card">
+            <div className="about-card-icon trophy-icon">
+              <FaTrophy size={18} />
+            </div>
+            <div className="about-card-body">
+              <span className="card-tag gold">Contest Achievements</span>
+              <h4 className="card-title">Podium &amp; Contest Finishes</h4>
+              <p className="card-subtitle-compact">Verified performances in CP competitions</p>
+
+              <div className="achievements-compact-list">
+                {achievements.map((item, idx) => (
+                  <div key={idx} className="achievement-compact-row">
+                    <span className={`achievement-rank-badge ${idx === 0 ? 'podium' : ''}`}>
+                      {item.rank}
+                    </span>
+                    <span className="achievement-contest-name-compact" title={item.contest}>
+                      {item.contest}
+                    </span>
+                    <span className="achievement-note-tag">{item.note}</span>
+                  </div>
                 ))}
               </div>
             </div>
